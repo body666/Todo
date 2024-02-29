@@ -1,0 +1,11 @@
+{
+  "addNewTask": "إضافه مهمه جديده",
+  "selectDate": "إختيار التاريخ",
+  "addTask": "إضافه مهمه",
+  "delete": "مسح",
+  "edit": "تعديل",
+  "editTask": "تعديل المهمه",
+  "saveChanges": "حفظ التغييرات",
+  "settings":"الإعدادات",
+  "taskDone":"تم"
+}

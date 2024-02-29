@@ -1,0 +1,12 @@
+{
+  "addNewTask": "Add new Task",
+  "selectDate": "Select Date",
+  "addTask": "Add task",
+  "delete": "Delete",
+  "edit": "Edit",
+  "editTask": "Edit Task",
+  "saveChanges": "Save Changes",
+  "settings": "Settings",
+  "taskDone": "Done!"
+
+}
