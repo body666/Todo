@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:todo_app/shared/network/firebase/firebase_manager.dart';
-
 import '../login/login.dart';
 
 class SignupPage extends StatelessWidget {

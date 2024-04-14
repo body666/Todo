@@ -99,39 +99,7 @@ class FirebaseManager {
    }
  }
 
- static Future<void> Login(String email,String password,Function OnSuccess,Function OnError)async {
-   try {
-     final credential = await FirebaseAuth.instance.signInWithEmailAndPassword(
-         email: email,
-         password: password
-     );
-     if(credential.user!.emailVerified)
-       {
-         OnSuccess();
-       }
 
-     else
-       {
-       OnError("Please verify your mail");
-     }
-
-   } on FirebaseAuthException catch (e) {
-     OnError("Wrong Mail or password");
-     // if(e.code == "The supplied auth credential is incorrect, malformed or has expired.")
-     //   {
-     //
-     //   }
-
-
-
-
-       // if (e.code == 'user-not-found') {
-       //   print('No user found for that email.');
-       // } else if (e.code == 'wrong-password') {
-       //   print('Wrong password provided for that user.');
-       // }
-   }
- }
 
 
 

@@ -3,8 +3,8 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:todo_app/Splash_Screen.dart';
-import 'package:todo_app/firebase_options.dart';
+import 'package:todo_app/Ui/splashScreen/Splash_Screen.dart';
+import 'package:todo_app/shared/network/firebase/firebase_options.dart';
 import 'package:todo_app/providers/my_provider.dart';
 import 'package:todo_app/styles/theming.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -52,7 +52,6 @@ class MyApp extends StatelessWidget {
         LoginPage.routeName:(context) => LoginPage(),
         SignupPage.routeName:(context) => SignupPage(),
         SplashScreen.routeName:(context) => SplashScreen()
-
 
 
 

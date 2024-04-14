@@ -84,7 +84,7 @@ class _homeLayoutState extends State<homeLayout> {
               selectedIndex=value;
             });
             },
-            items:  [
+            items:  const [
               BottomNavigationBarItem(icon:Icon(Icons.list,size: 30,),label: ""),
               BottomNavigationBarItem(icon:Icon(Icons.settings,size: 30,),label: ""),
             ]
