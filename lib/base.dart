@@ -49,13 +49,13 @@ abstract class BaseView<VM extends BaseViewModel,S extends StatefulWidget> exten
       context: context,
       barrierDismissible: false,
       builder:(context) => AlertDialog(
-        title: Text("Error"),
+        title: const Text("Error"),
         content: Text(message),
         actions: [
           ElevatedButton(onPressed: () {
             Navigator.pop(context);
           },
-              child:Text("Okay") )
+              child:const Text("Okay") )
         ],
       ),
     );
