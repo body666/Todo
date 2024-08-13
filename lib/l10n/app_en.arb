@@ -7,6 +7,8 @@
   "editTask": "Edit Task",
   "saveChanges": "Save Changes",
   "settings": "Settings",
-  "taskDone": "Done!"
+  "taskDone": "Done!",
+  "theme": "Theme",
+  "selectTime":"Select Time"
 
 }

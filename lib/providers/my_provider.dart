@@ -1,5 +1,4 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:todo_app/models/user_model.dart';
@@ -7,6 +6,7 @@ import 'package:todo_app/shared/network/firebase/firebase_manager.dart';
 class MyProvider extends ChangeNotifier{
   userModel? Usermodel;
   User? firebaseUser;
+
 
   String local="en";
   ThemeMode themeMode = ThemeMode.dark;
@@ -19,10 +19,12 @@ class MyProvider extends ChangeNotifier{
        }
   }
 
+
+
   ChangeLanguage(String langCode)async{
     local=langCode;
    final SharedPreferences prefs= await SharedPreferences.getInstance();
-   prefs.setString("lang", langCode);
+    prefs.setString("lang", langCode);
     notifyListeners();
 
   }
@@ -40,7 +42,6 @@ class MyProvider extends ChangeNotifier{
     firebaseUser=FirebaseAuth.instance.currentUser;
     Usermodel=await FirebaseManager.readUser(firebaseUser!.uid);
     notifyListeners();
-
   }
 
 }

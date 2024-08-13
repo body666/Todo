@@ -3,7 +3,6 @@ import 'package:todo_app/styles/colors.dart';
 class MyThemeData{
 
   static ThemeData lightTheme = ThemeData(
-
           appBarTheme:  AppBarTheme(
             elevation: 0,
            color: secondarylight,
@@ -16,6 +15,7 @@ class MyThemeData{
        ),
        scaffoldBackgroundColor: primarylight,
        bottomNavigationBarTheme: BottomNavigationBarThemeData(
+         elevation: 0,
        type:BottomNavigationBarType.fixed,
        backgroundColor: Colors.white,
        selectedItemColor:primary,
@@ -31,7 +31,7 @@ class MyThemeData{
         onError: floatingActionButtonSidelight,
         background: Colors.blue,//
         onBackground: Colors.blue,//
-        surface:Colors.orange,//
+        surface:Colors.white,//
         onSurface: Colors.blue//
     ),
     dialogBackgroundColor: Colors.white
@@ -68,7 +68,7 @@ class MyThemeData{
           onError: floatingActionButtonSidedark,
           background: Colors.yellow,//
           onBackground: Colors.blue,//
-          surface: Colors.blue,//
+          surface: Color(0xFF1E1F22),//
           onSurface: Colors.white,//
       ),
   // dialogBackgroundColor: Colors.white

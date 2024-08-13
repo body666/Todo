@@ -7,5 +7,7 @@
   "editTask": "تعديل المهمه",
   "saveChanges": "حفظ التغييرات",
   "settings":"الإعدادات",
-  "taskDone":"تم"
+  "taskDone":"تم",
+  "theme":"السمه",
+  "selectTime":"إختيار الوقت"
 }

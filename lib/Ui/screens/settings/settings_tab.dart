@@ -54,9 +54,9 @@ class _settingsTabState extends State<settingsTab> {
                     ),
                     Switch(
                       activeColor: provider.themeMode == ThemeMode.light?
-                      Colors.blue:Colors.yellow,
+                      Colors.blue:Colors.blue,
                       inactiveTrackColor: provider.themeMode == ThemeMode.light?
-                      Colors.grey:Colors.white,
+                      Colors.white:Colors.white,
                         value: LangStatus,
                         onChanged: (newValue) {
                           provider.local == "en"
@@ -75,16 +75,16 @@ class _settingsTabState extends State<settingsTab> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    const Text(
-                      "Theme",
+                     Text(
+                      AppLocalizations.of(context)!.theme,
                       style:
                           TextStyle(fontSize: 25, fontWeight: FontWeight.w600),
                     ),
                     Switch(
                         activeColor: provider.themeMode == ThemeMode.light?
-                        Colors.blue:Colors.yellow,
+                        Colors.blue:Colors.blue,
                         inactiveTrackColor: provider.themeMode == ThemeMode.light?
-                        Colors.grey:Colors.white,
+                        Colors.white:Colors.white,
                         value: ThemeStatus,
                         onChanged: (newValue) {
                           provider.themeMode == ThemeMode.dark

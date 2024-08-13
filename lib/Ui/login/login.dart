@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:todo_app/Ui/layout/home_layout.dart';
@@ -5,6 +6,7 @@ import 'package:todo_app/Ui/login/login_connector.dart';
 import 'package:todo_app/Ui/login/login_vm.dart';
 import 'package:todo_app/base.dart';
 import 'package:todo_app/providers/my_provider.dart';
+import '../../styles/colors.dart';
 import '../signUp/signUp.dart';
 class LoginPage extends StatefulWidget {
   static const String routeName = "LoginPage";
@@ -17,9 +19,10 @@ class _LoginPageState extends BaseView<LoginViewModel,LoginPage>
     implements LoginConnector{
   LoginViewModel viewModel = LoginViewModel();
 
+  var _formkey=GlobalKey<FormState>();
   var emailController=TextEditingController();
   var passwordController=TextEditingController();
-  var _formkey=GlobalKey<FormState>();
+
 
   @override
   void initState() {
@@ -27,26 +30,32 @@ class _LoginPageState extends BaseView<LoginViewModel,LoginPage>
     viewModel.connector=this;
   }
 
-
   @override
   Widget build(BuildContext context) {
+    final credential = FirebaseAuth.instance;
     var provider =Provider.of<MyProvider>(context);
       return ChangeNotifierProvider(
       create: (context) => viewModel,
        builder: (context, child) =>  MaterialApp(
          debugShowCheckedModeBanner: false,
          home: Scaffold(
+           backgroundColor:provider.themeMode==ThemeMode.light?primarylight: Color(0xFF0D1B2A),
            body: Container(
+             color: provider.themeMode==ThemeMode.light?primarylight: Color(0xFF0D1B2A),
              margin: const EdgeInsets.all(24),
              child: Column(
                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                children: [
-                 const Column(
+                  Column(
                    children: [
                      Text("Welcome Back",
-                       style: TextStyle(fontSize: 40, fontWeight: FontWeight.bold),
+                       style: TextStyle(
+                         fontSize: 40,
+                           fontWeight: FontWeight.bold,
+                           color:provider.themeMode==ThemeMode.light?Colors.blue: Colors.white,
+                       ),
                      ),
-                     Text("Enter your credential to login"),
+                     Text("Enter your credential to login",style: TextStyle(color: Colors.blue[700]),),
                    ],
                  ),
                  Form(
@@ -55,19 +64,25 @@ class _LoginPageState extends BaseView<LoginViewModel,LoginPage>
                      crossAxisAlignment: CrossAxisAlignment.stretch,
                      children: [
                        TextFormField(
+                         style: TextStyle( color:provider.themeMode==ThemeMode.light?Colors.black: Colors.white,),
                          decoration: InputDecoration(
                              hintText: "Email",
+                             hintStyle: TextStyle(
+                                 color:provider.themeMode==ThemeMode.light? Color(0xFF505A58):Colors.white,
+                             ),
                              border: OutlineInputBorder(
                                  borderRadius: BorderRadius.circular(18),
                                  borderSide: BorderSide.none
                              ),
                              fillColor: Colors.blue.withOpacity(0.1),
                              filled: true,
-                             prefixIcon: const Icon(Icons.person)
+                             prefixIcon: const Icon(
+                               Icons.person, color: Color(0xFF4389FD)
+                             )
                          ),
                          controller: emailController,
                          keyboardType: TextInputType.emailAddress,
-
+                         cursorColor:provider.themeMode==ThemeMode.light? Colors.white:Colors.purple ,
                          validator: (value){
                            if( value==null || value.isEmpty)
                            {
@@ -86,18 +101,23 @@ class _LoginPageState extends BaseView<LoginViewModel,LoginPage>
                        ),
                        const SizedBox(height: 10),
                        TextFormField(
+                         style: TextStyle(
+                           color:provider.themeMode==ThemeMode.light?Colors.black: Colors.white,
+                         ),
                          decoration: InputDecoration(
                            hintText: "Password",
+                           hintStyle: TextStyle( color:provider.themeMode==ThemeMode.light? Color(0xFF505A58):Colors.white,
+                           ),
                            border: OutlineInputBorder(
                                borderRadius: BorderRadius.circular(18),
                                borderSide: BorderSide.none),
                            fillColor: Colors.blue.withOpacity(0.1),
                            filled: true,
-                           prefixIcon: const Icon(Icons.password),
+                           prefixIcon: const Icon(Icons.password,color:Color(0xFF4389FD)),
 
                          ),
                          controller: passwordController,
-
+                         cursorColor:provider.themeMode==ThemeMode.light? Colors.white:Colors.purple ,
                          validator: (value){
                            if( value==null || value.isEmpty)
                            {
@@ -118,18 +138,21 @@ class _LoginPageState extends BaseView<LoginViewModel,LoginPage>
                        const SizedBox(height: 10),
                        ElevatedButton(
                          onPressed: () {
-                           if(_formkey.currentState!.validate()){
+
+                           if(_formkey.currentState!.validate() ){
+                             provider.initUser();
                              viewModel.Login(emailController.text, passwordController.text);
                            }
+
                          },
                          style: ElevatedButton.styleFrom(
                            shape: const StadiumBorder(),
                            padding: const EdgeInsets.symmetric(vertical: 16),
-                           backgroundColor: Colors.blue,
+                           backgroundColor: Colors.blueAccent,
                          ),
                          child: const Text(
                            "Login",
-                           style: TextStyle(fontSize: 20),
+                           style: TextStyle(fontSize: 20,color: Colors.white),
                          ),
                        )
                      ],
@@ -137,21 +160,22 @@ class _LoginPageState extends BaseView<LoginViewModel,LoginPage>
                  ),
                  TextButton(
                    onPressed: () {
-                     //FirebaseAuth.instance.sendPasswordResetEmail(email:emailConteoller as String);
+                     FirebaseAuth.instance.sendPasswordResetEmail(email:emailController as String);
                    },
-                   child: const Text("Forgot password?",
-                     style: TextStyle(color: Colors.blue),
+                   child:  Text("Forgot password?",
+                     style: TextStyle(color: Colors.blue[700]),
                    ),
                  ),
                  Row(
                    mainAxisAlignment: MainAxisAlignment.center,
                    children: [
-                     const Text("Don't have an account? "),
+                      Text("Don't have an account? ",
+                       style: TextStyle( color:provider.themeMode==ThemeMode.light?Colors.blue: Colors.white,),),
                      TextButton(
                          onPressed: () {
                            Navigator.pushNamed(context, SignupPage.routeName);
                          },
-                         child: const Text("Sign Up", style: TextStyle(color: Colors.blue),)
+                         child:  Text("Sign Up", style: TextStyle(color: Colors.blue[700]),)
                      )
                    ],
                  ),
@@ -167,9 +191,7 @@ class _LoginPageState extends BaseView<LoginViewModel,LoginPage>
 
   @override
   goToHome() {
-    var provider =Provider.of<MyProvider>(context);
-      provider.initUser();
-      Navigator.pushNamedAndRemoveUntil(context , homeLayout.routeName, (route) => false);
+     Navigator.pushNamedAndRemoveUntil(context , HomeLayout.routeName, (route) => false);
 
   }
 
@@ -177,45 +199,6 @@ class _LoginPageState extends BaseView<LoginViewModel,LoginPage>
   LoginViewModel initViewModel() {
     return LoginViewModel();
   }
-
-
-
-
-
-  // @override
-  // hideLoading() {
-  //   Navigator.pop(context);
-  // }
-  //
-  // @override
-  // showLoading(String text) {
-  //   showDialog(
-  //     context: context,
-  //     barrierDismissible: false,
-  //     builder:(context) => const AlertDialog(
-  //       title: Center(child: CircularProgressIndicator()),
-  //     ),);
-  //
-  // }
-  //
-  // @override
-  // showMessage(String message) {
-  //   showDialog(
-  //     context: context,
-  //     barrierDismissible: false,
-  //     builder:(context) => AlertDialog(
-  //       title: Text("Error"),
-  //       content: Text(message),
-  //       actions: [
-  //         ElevatedButton(onPressed: () {
-  //           Navigator.pop(context);
-  //         },
-  //             child:Text("Okay") )
-  //       ],
-  //     ),
-  //   );
-  // }
-
 
 
 }
