@@ -104,7 +104,7 @@ class _HomeLayoutState extends State<HomeLayout> {
                       color: Theme.of(context).colorScheme.onSecondary,
                       fontWeight: FontWeight.bold),
                 ),
-                SizedBox(width: 60),
+                SizedBox(width: 65),
                 Text(
                   "${provider.Usermodel?.username}",
                   style: TextStyle(
@@ -117,6 +117,7 @@ class _HomeLayoutState extends State<HomeLayout> {
         ),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
         floatingActionButton: FloatingActionButton(
+          splashColor: Colors.transparent,
           onPressed: () {
             showTaskBottomSheet();
           },
@@ -137,32 +138,32 @@ class _HomeLayoutState extends State<HomeLayout> {
           ),
         ),
         bottomNavigationBar: BottomAppBar(
-          notchMargin: 10,
-          shape: CircularNotchedRectangle(),
-          child: SizedBox(
-            height: kBottomNavigationBarHeight, // Adjust if necessary
-            child: BottomNavigationBar(
-              backgroundColor: Colors.transparent,
-              elevation: 0,
-              currentIndex: selectedIndex,
-              iconSize: 20, // Set the icon size here
-              onTap: (value) {
-                setState(() {
-                  selectedIndex = value;
-                });
+          notchMargin: 8,
+          padding: const EdgeInsets.all(0),
+          clipBehavior: Clip.antiAliasWithSaveLayer,
+          shape: const CircularNotchedRectangle(),
+          child: BottomNavigationBar(
+              showSelectedLabels: false,
+              showUnselectedLabels: false,
+              onTap: (index) {
+                selectedIndex = index;
+                setState(() {});
               },
+              currentIndex: selectedIndex,
               items: const [
                 BottomNavigationBarItem(
-                  icon: Icon(Icons.list),
-                  label: "",
-                ),
+                    icon: Icon(
+                      Icons.list_outlined,
+                      size: 30,
+                    ),
+                    label: ''),
                 BottomNavigationBarItem(
-                  icon: Icon(Icons.settings),
-                  label: "",
-                ),
-              ],
-            ),
-          ),
+                    icon: Icon(
+                      Icons.settings,
+                      size: 30,
+                    ),
+                    label: '')
+              ]),
         ),
         body: SafeArea(
           child: tabs[selectedIndex],

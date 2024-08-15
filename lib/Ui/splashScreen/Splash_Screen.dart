@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:todo_app/Ui/layout/home_layout.dart';
+import 'package:todo_app/Ui/login/login.dart';
 import '../../providers/my_provider.dart';
 class SplashScreen extends StatefulWidget{
   static const String routeName="SplashScreen";
@@ -12,7 +13,7 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     Future.delayed(const Duration(seconds: 3),(){
-      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>HomeLayout()));
+      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>LoginPage()));
     });
     super.initState();
   }

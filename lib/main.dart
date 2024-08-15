@@ -43,9 +43,7 @@ class MyApp extends StatelessWidget {
       theme: MyThemeData.lightTheme,
       darkTheme: MyThemeData.darkTheme,
       debugShowCheckedModeBanner: false,
-      initialRoute: provider.firebaseUser != null
-          ? SplashScreen.routeName
-          : LoginPage.routeName,
+      initialRoute: SplashScreen.routeName,
       routes: {
         HomeLayout.routeName: (context) => HomeLayout(),
         EditTask.routeName: (context) => EditTask(),
