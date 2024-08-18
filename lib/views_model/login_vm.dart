@@ -14,7 +14,6 @@ class LoginViewModel extends BaseViewModel<LoginConnector> {
           connector!.hideLoading();
           connector!.goToHome();
         } else {
-          // Email is not verified, show a message
           connector!.hideLoading();
           connector!.showMessage("Please verify your email first");
 
@@ -28,7 +27,6 @@ class LoginViewModel extends BaseViewModel<LoginConnector> {
 
     }
   }
-  
 
 
 }

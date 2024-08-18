@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:todo_app/shared/network/firebase/firebase_manager.dart';
+import 'package:todo_app/Ui/signUp/signUp_connector.dart';
+import 'package:todo_app/views_model/signUp_vm.dart';
+import 'package:todo_app/base.dart';
+import '../../data/firebase/firebase_manager.dart';
 import '../../providers/my_provider.dart';
 import '../../styles/colors.dart';
 import '../login/login.dart';
@@ -12,13 +15,20 @@ class SignupPage extends StatefulWidget {
   _SignupPageState createState() => _SignupPageState();
 }
 
-class _SignupPageState extends State<SignupPage> {
+class _SignupPageState extends BaseView<SignUpViewModel,SignupPage> implements SignUpConnector{
+  SignUpViewModel signUpViewModel =SignUpViewModel();
+
   final usernameController = TextEditingController();
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   final confirmPasswordController = TextEditingController();
 
   final _formKey = GlobalKey<FormState>();
+  @override
+  void initState() {
+    super.initState();
+    viewModel.connector=this;
+  }
 
   @override
   void dispose() {
@@ -67,7 +77,7 @@ class _SignupPageState extends State<SignupPage> {
                     Directionality(
                       textDirection: TextDirection.ltr,
                       child: TextFormField(
-                        style: TextStyle( color:provider.themeMode==ThemeMode.light?Colors.black: Colors.white,),
+                        style: TextStyle(color:provider.themeMode==ThemeMode.light?Colors.black: Colors.white,),
                         controller: usernameController,
                         decoration: InputDecoration(
                           hintText: "Username",
@@ -179,36 +189,8 @@ class _SignupPageState extends State<SignupPage> {
                   child: ElevatedButton(
                     onPressed: () {
                       if (_formKey.currentState!.validate()) {
-                        FirebaseManager.CreateAccount(
-                          emailController.text,
-                          passwordController.text,
-                          usernameController.text,
-                              () {
-                            Navigator.pushNamedAndRemoveUntil(
-                              context,
-                              LoginPage.routeName,
-                                  (route) => false,
-                            );
-                          },
-                              (error) {
-                            showDialog(
-                              context: context,
-                              barrierDismissible: false,
-                              builder: (context) => AlertDialog(
-                                title: const Text("Error"),
-                                content: Text(error.toString()),
-                                actions: [
-                                  ElevatedButton(
-                                    onPressed: () {
-                                      Navigator.pop(context);
-                                    },
-                                    child: const Text("Okay"),
-                                  )
-                                ],
-                              ),
-                            );
-                          },
-                        );
+                        provider.initUser();
+                        viewModel.CreateAccount(emailController.text, passwordController.text, usernameController.text);
                       }
                     },
                     child: const Text(
@@ -294,5 +276,15 @@ class _SignupPageState extends State<SignupPage> {
         ),
       ),
     );
+  }
+
+  @override
+  goToLogin() {
+    Navigator.pushNamedAndRemoveUntil(context,LoginPage.routeName, (route) => false);
+  }
+
+  @override
+  SignUpViewModel initViewModel() {
+    return SignUpViewModel();
   }
 }

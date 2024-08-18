@@ -2,7 +2,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:todo_app/models/user_model.dart';
-import 'package:todo_app/shared/network/firebase/firebase_manager.dart';
+
+import '../data/firebase/firebase_manager.dart';
 class MyProvider extends ChangeNotifier{
   userModel? Usermodel;
   User? firebaseUser;

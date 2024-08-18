@@ -1,11 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:todo_app/Ui/splashScreen/Splash_Screen.dart';
-import 'package:todo_app/models/task_model.dart';
+
 import 'package:todo_app/providers/my_provider.dart';
 import 'package:todo_app/styles/theming.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -13,7 +13,7 @@ import 'Ui/layout/home_layout.dart';
 import 'Ui/login/login.dart';
 import 'Ui/screens/tasks/edit_task.dart';
 import 'Ui/signUp/signUp.dart';
-import 'firebase_options.dart';
+import 'data/firebase/firebase_options.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -43,7 +43,9 @@ class MyApp extends StatelessWidget {
       theme: MyThemeData.lightTheme,
       darkTheme: MyThemeData.darkTheme,
       debugShowCheckedModeBanner: false,
-      initialRoute: SplashScreen.routeName,
+      initialRoute:
+      provider.firebaseUser!=null?HomeLayout.routeName:
+      SplashScreen.routeName,
       routes: {
         HomeLayout.routeName: (context) => HomeLayout(),
         EditTask.routeName: (context) => EditTask(),

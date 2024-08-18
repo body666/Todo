@@ -43,7 +43,6 @@ class FirebaseManager {
   }
 
   static Future<void> editTask(TaskModel task){
-    var collection = getTasksCollection();
     return getTasksCollection().doc(task.id).update(task.toJson());
   }
 

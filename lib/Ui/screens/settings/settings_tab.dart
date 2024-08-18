@@ -3,7 +3,6 @@ import 'package:provider/provider.dart';
 import 'package:todo_app/styles/colors.dart';
 import '../../../providers/my_provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-
 class settingsTab extends StatefulWidget {
   @override
   State<settingsTab> createState() => _settingsTabState();

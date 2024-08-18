@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:todo_app/models/task_model.dart';
+import '../../../data/firebase/firebase_manager.dart';
 import '../../../providers/my_provider.dart';
-import '../../../shared/network/firebase/firebase_manager.dart';
 import '../../../styles/colors.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 class EditTask extends StatefulWidget {

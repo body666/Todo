@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:todo_app/Ui/layout/home_layout.dart';
 import 'package:todo_app/Ui/login/login_connector.dart';
-import 'package:todo_app/Ui/login/login_vm.dart';
+import 'package:todo_app/views_model/login_vm.dart';
 import 'package:todo_app/base.dart';
 import 'package:todo_app/providers/my_provider.dart';
 import '../../styles/colors.dart';
@@ -15,8 +15,7 @@ class LoginPage extends StatefulWidget {
   State<LoginPage> createState() => _LoginPageState();
 }
 
-class _LoginPageState extends BaseView<LoginViewModel,LoginPage>
-    implements LoginConnector{
+class _LoginPageState extends BaseView<LoginViewModel,LoginPage> implements LoginConnector{
   LoginViewModel viewModel = LoginViewModel();
 
   var _formkey=GlobalKey<FormState>();
@@ -32,7 +31,6 @@ class _LoginPageState extends BaseView<LoginViewModel,LoginPage>
 
   @override
   Widget build(BuildContext context) {
-    final credential = FirebaseAuth.instance;
     var provider =Provider.of<MyProvider>(context);
       return ChangeNotifierProvider(
       create: (context) => viewModel,
@@ -138,10 +136,9 @@ class _LoginPageState extends BaseView<LoginViewModel,LoginPage>
                        const SizedBox(height: 10),
                        ElevatedButton(
                          onPressed: () {
-
                            if(_formkey.currentState!.validate() ){
                              provider.initUser();
-                             viewModel.Login(emailController.text, passwordController.text);
+                             viewModel.Login(emailController.text,passwordController.text);
                            }
 
                          },
@@ -192,7 +189,6 @@ class _LoginPageState extends BaseView<LoginViewModel,LoginPage>
   @override
   goToHome() {
      Navigator.pushNamedAndRemoveUntil(context , HomeLayout.routeName, (route) => false);
-
   }
 
   @override

@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:todo_app/models/task_model.dart';
-import 'package:todo_app/shared/network/firebase/firebase_manager.dart';
+
 import 'package:todo_app/styles/colors.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import '../../../data/firebase/firebase_manager.dart';
 import '../../../providers/my_provider.dart';
 import 'edit_task.dart';
 
